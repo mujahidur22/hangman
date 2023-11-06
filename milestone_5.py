@@ -1,6 +1,6 @@
 # word_list = ["banana", "orange", "strawberry", "apple", "grape"]
 
-from hangman.hangman_Template import play_game
+# from hangman.hangman_Template import play_game
 
 
 class Hangman:
@@ -14,13 +14,14 @@ class Hangman:
         self.word_list = word_list
         self.list_of_guesses = []
         self.ask_for_input()
+        
     def check_guess(self, guess):
         guess = guess.lower()
         if guess in self.word:
             print(f"Good guess! {guess} is in the word.")
             for letter in self.word:
                 if letter == guess:
-                    self.word_guessed[letter] = guess
+                    self.word_guessed.index(letter) = guess
             num_letters -= 1
         else:
             num_lives -= 1
@@ -39,13 +40,13 @@ class Hangman:
                 self.list_of_guesses.append(guess)
                 
 
-    def play_game(word_list):
+def play_game(word_list):
         num_lives = 5
         game = Hangman(word_list, num_lives=5)
         while True:
-            if num_lives == 0:
-                return "You lost!"
-            elif num_letters > 0:
+            if self.num_lives == 0:
+                "You lost!"
+            elif self.num_letters > 0:
                 ask_for_input()
             elif num_lives != 0 and num_letters <= 0:
                 return "Congratulations. You won the game!"
