@@ -1,4 +1,7 @@
-word_list = ["banana", "orange", "strawberry", "apple", "grape"]
+# word_list = ["banana", "orange", "strawberry", "apple", "grape"]
+
+from hangman.hangman_Template import play_game
+
 
 class Hangman:
     def __init__(self, word_list, num_lives=5):
@@ -29,8 +32,25 @@ class Hangman:
             guess = input("Enter a single letter: ")
             if len(guess) != 1 or guess.isalpha() == False:
                 print("Invalid letter. Please, enter a single alphabetical character.")
-            elif guess in list_of_guesses:
+            elif guess in self.list_of_guesses:
                 print("You already tried that letter!")
             else: 
                 self.check_guess(guess)
                 self.list_of_guesses.append(guess)
+                
+
+    def play_game(word_list):
+        num_lives = 5
+        game = Hangman(word_list, num_lives=5)
+        while True:
+            if num_lives == 0:
+                return "You lost!"
+            elif num_letters > 0:
+                ask_for_input()
+            elif num_lives != 0 and num_letters <= 0:
+                return "Congratulations. You won the game!"
+            
+            
+if __name__ == '__main__':
+    word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
+    play_game(word_list)
