@@ -9,7 +9,8 @@ class Hangman:
         word = random.choice(word_list)
         self.word = word
         self.word_guessed = ['_'] * len(self.word)
-        self.num_letters = len(set(self.word))
+        num_letters = len(set(self.word))-len(set(self.word_guessed))
+        self.num_letters = num_letters
         self.num_lives = num_lives
         self.word_list = word_list
         self.list_of_guesses = []
@@ -23,12 +24,15 @@ class Hangman:
                 if letter == guess:
                     self.word_guessed[index] = guess
             self.num_letters -= 1
+            print(f"You have guessed: \n{''.join(self.word_guessed)}")
         else:
             self.num_lives -= 1
             print(f"Sorry, {guess} is not in the word.")
             print(f"You have {self.num_lives} lives left.")
+            print(f"You have guessed: \n{''.join(self.word_guessed)}")
     
     def ask_for_input(self):
+        print(f"The word to guess is: \n{''.join(self.word_guessed)}")
         while True:
             guess = input("Enter a single letter: ")
             if len(guess) != 1 or guess.isalpha() == False:
@@ -42,13 +46,16 @@ class Hangman:
 def play_game(word_list):
     while True:
         game = Hangman(word_list, num_lives=5)
+        num_letters = len(set(word))-len(set(word_guessed))
         if num_lives == 0:
             print("You lost!")
-            break 
+            print(f"The word was {word}")
+            break
         elif num_lives != 0 or num_letters == 0:
             print("Congratulations. You won the game!")
         elif num_letters > 0:
             ask_for_input()
+
         
             
 if __name__ == '__main__':
