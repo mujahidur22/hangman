@@ -4,7 +4,7 @@
 
 
 class Hangman:
-    def __init__(self, word_list, num_lives=5):
+    def __init__(self, word_list, num_lives):
         import random
         word = random.choice(word_list)
         self.word = word
@@ -32,7 +32,7 @@ class Hangman:
             print(f"You have guessed: \n{''.join(self.word_guessed)}")
     
     def ask_for_input(self):
-        print(f"The word to guess is: \n{''.join(self.word_guessed)}")
+        print(f"The word to guess is: \n{''.join(self.word_guessed)}\nYou have {self.num_lives} lives remaining")
         while True:
             guess = input("Enter a single letter: ")
             if len(guess) != 1 or guess.isalpha() == False:
@@ -42,23 +42,30 @@ class Hangman:
             else: 
                 self.check_guess(guess)
                 self.list_of_guesses.append(guess)
+                
+
+                
 
 def play_game(word_list):
-    #num_lives = 5
-    game = Hangman(word_list, num_lives=5)
+    #num_lives = 0
+    game = Hangman(word_list, num_lives = 5)
+    
     while True:
         if game.num_lives == 0:
+            
             print("You lost!")
             print(f"The word was {game.word}")
             break
-        elif game.num_lives != 0 and game.num_letters == 0:
+        elif game.num_letters == 0:
             print("Congratulations. You won the game!")
             break
-        elif game.num_letters > 0:
-            print(game.num_letters)
+        #elif game.num_letters > 0:
+        else:
+            print(game.num_lives)
             Hangman.ask_for_input()
 
 
 if __name__ == '__main__':
     word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
     play_game(word_list)
+    
