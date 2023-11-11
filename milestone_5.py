@@ -1,8 +1,3 @@
-# word_list = ["banana", "orange", "strawberry", "apple", "grape"]
-
-# from hangman.hangman_Template import play_game
-
-
 class Hangman:
     def __init__(self, word_list, num_lives):
         import random
@@ -27,12 +22,9 @@ class Hangman:
             print(f"You have guessed: \n{''.join(self.word_guessed)}")
         else:
             self.num_lives -= 1
-            print(f"Sorry, {guess} is not in the word.")
-            print(f"You have {self.num_lives} lives left.")
-            print(f"You have guessed: \n{''.join(self.word_guessed)}")
+            print(f"Sorry, {guess} is not in the word.\nYou have guessed: \n{''.join(self.word_guessed)}\nYou have {self.num_lives} lives left.")
     
     def ask_for_input(self):
-        print(f"The word to guess is: \n{''.join(self.word_guessed)}\nYou have {self.num_lives} lives remaining")
         while True:
             guess = input("Enter a single letter: ")
             if len(guess) != 1 or guess.isalpha() == False:
@@ -42,30 +34,28 @@ class Hangman:
             else: 
                 self.check_guess(guess)
                 self.list_of_guesses.append(guess)
+                break
                 
 
                 
 
 def play_game(word_list):
-    #num_lives = 0
-    game = Hangman(word_list, num_lives = 5)
-    
+    game = Hangman(word_list, num_lives)
     while True:
         if game.num_lives == 0:
-            
             print("You lost!")
             print(f"The word was {game.word}")
             break
         elif game.num_letters == 0:
             print("Congratulations. You won the game!")
             break
-        #elif game.num_letters > 0:
         else:
-            print(game.num_lives)
-            Hangman.ask_for_input()
+            Hangman.ask_for_input(game)
 
 
 if __name__ == '__main__':
     word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
+    num_lives = 5
+    print(f"Welcome to the Hangman game. You have {num_lives} lives to guess the correct word. Start by making your first guess below:")
     play_game(word_list)
     
