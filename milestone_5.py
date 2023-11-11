@@ -14,7 +14,7 @@ class Hangman:
         self.num_lives = num_lives
         self.word_list = word_list
         self.list_of_guesses = []
-        self.ask_for_input()
+        #self.ask_for_input()
         
     def check_guess(self, guess):
         guess = guess.lower()
@@ -45,13 +45,14 @@ class Hangman:
                 self.list_of_guesses.append(guess)
 
 def play_game(word_list):
-    game = Hangman(word_list, num_lives=5)
-    num_letters = len(set(word))
+    num_lives = 5
+    game = Hangman(word_list, num_lives)
     while True:
+        num_letters = len(set(word))
         if num_lives == 0:
             print("You lost!")
             print(f"The word was {word}")
-            break
+            return
         elif num_lives != 0 or num_letters == 0:
             print("Congratulations. You won the game!")
         elif num_letters > 0:
